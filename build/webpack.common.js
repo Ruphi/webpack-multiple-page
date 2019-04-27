@@ -2,6 +2,7 @@ const path = require('path');
 const utils = require('../config/utils');
 const config = require('../config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function resolve (dir) {
     return path.join(__dirname, '..', dir)
@@ -10,13 +11,26 @@ function resolve (dir) {
 module.exports = {
     context: path.resolve(__dirname, '../'),
     entry: utils.getEntry(),
-    plugins: utils.setHtmlWebpackPlugin(),
+    plugins: utils.setHtmlWebpackPlugin().concat([
+        new MiniCssExtractPlugin({
+            filename: 'static/css/[name].[contenthash].css'
+        })
+    ]),
     module: {
         rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+            },
+            {
+                test: /\.(le|sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                    'less-loader'
+                ]
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

@@ -5,7 +5,6 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -51,18 +50,7 @@ const prodConfig = merge(common, {
                 ignore: ['.*']
             }
         ]),
-        new MiniCssExtractPlugin({
-            filename: 'static/css/[name].[contenthash].css'
-        })
     ],
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            }
-        ]
-    }
 });
 
 const exist = prodConfig.optimization.splitChunks.cacheGroups;

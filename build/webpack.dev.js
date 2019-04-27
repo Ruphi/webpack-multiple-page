@@ -5,7 +5,7 @@ const utils = require('../config/utils');
 const config = require('../config');
 const common = require('./webpack.common');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
@@ -18,14 +18,6 @@ const devConfig = merge(common, {
         filename: utils.assetsPath('js/[name].[hash].js'),
         chunkFilename: utils.assetsPath('js/[name].[hash].js'),
         publicPath: config.dev.assetsPublicPath
-    },
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            }
-        ]
     },
     devServer: {
         contentBase: path.join(__dirname, '../dist'),
@@ -53,11 +45,7 @@ const devConfig = merge(common, {
                 to: config.dev.assetsSubDirectory,
                 ignore: ['.*']
             }
-        ]),
-
-        new MiniCssExtractPlugin({
-            filename: 'static/css/[name].[hash].css'
-        })
+        ])
     ]
 });
 

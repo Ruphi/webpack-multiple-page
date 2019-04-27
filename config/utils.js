@@ -39,7 +39,7 @@ module.exports = {
     },
     setCssSplit: function () {
         const styleObj = {};
-        const fileArr = glob.sync('./src/pages/**/*.css');
+        const fileArr = glob.sync('./src/pages/**/*.html');
         for (let i = 0; i < fileArr.length; i++) {
             let name = fileArr[i].split('/')[fileArr[i].split('/').length-2];
             styleObj[name+'Styles'] = {
