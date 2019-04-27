@@ -1,4 +1,5 @@
-/*
- *Created on 2019-04-26.
- *by fxp  
- */
+import _ from 'lodash';
+
+const div = document.createElement('div');
+div.innerHTML = _.join(['login', 'page'], ' ');
+document.body.appendChild(div);

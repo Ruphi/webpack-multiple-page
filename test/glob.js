@@ -1,3 +1,4 @@
+const path = require('path');
 const glob = require('glob');
 const _ = require('_lodash@4.17.11@lodash');
 
@@ -6,5 +7,7 @@ console.log(fileArr);
 fileArr.forEach(function (item) {
     let res = item.split('/');
     console.log(res);
-})
+});
 console.log(_.concat([1], [2]));
+
+console.log(process.env.NODE_ENV);
